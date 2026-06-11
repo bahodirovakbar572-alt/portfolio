@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahodirov Akbar — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8e8f0;
+    --text2: #8888a0;
+    --text3: #55556a;
+    --accent: #7c6af7;
+    --accent2: #a594ff;
+    --accent-bg: rgba(124,106,247,0.08);
+    --accent-border: rgba(124,106,247,0.25);
+    --green: #3dd68c;
+    --green-bg: rgba(61,214,140,0.08);
+    --amber: #f5a623;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+    background: rgba(10,10,15,0.85);
+    
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent2);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 7rem 0 5rem; }
+  .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  #hero {
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .hero-name {
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin-bottom: 0.6rem;
+  }
+  .hero-name span {
+    color: transparent;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text2);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-title .cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1.1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero-desc {
+    color: var(--text2);
+    font-size: 15px;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    line-height: 1.75;
+  }
+  .hero-cta {
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .btn-primary {
+    padding: 10px 22px;
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost {
+    padding: 10px 22px;
+    background: transparent;
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 400;
+    border: 1px solid var(--border2);
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent-border); color: var(--text); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 2.5rem;
+  }
+
+  /* STACK */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .stack-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .stack-item:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .stack-item .name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .stack-item .role {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  /* PROJECT CARD */
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: var(--accent-border); }
+  .project-card:hover::before { opacity: 1; }
+  .project-card.active-project {
+    border-color: var(--accent-border);
+    background: var(--accent-bg);
+  }
+  .project-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 0.8rem; gap: 1rem;
+  }
+  .project-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .project-desc {
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .badge-live {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-bg);
+    border: 1px solid rgba(61,214,140,0.2);
+    border-radius: 4px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-live::before {
+    content: '';
+    display: block; width: 5px; height: 5px;
+    border-radius: 50%; background: var(--green);
+  }
+  .badge-wip {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--amber);
+    background: rgba(245,166,35,0.08);
+    border: 1px solid rgba(245,166,35,0.2);
+    border-radius: 4px;
+    padding: 3px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    letter-spacing: 0.04em;
+  }
+  .project-card.active-project .tag {
+    background: rgba(124,106,247,0.1);
+    border-color: var(--accent-border);
+    color: var(--accent2);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 560px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  .about-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+  }
+  .about-card .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 4px;
+  }
+  .about-card .value {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* CONTACT */
+  .contact-links {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .contact-link {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.4rem;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .contact-link:hover { border-color: var(--accent-border); transform: translateX(4px); }
+  .contact-link .cl-left {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .contact-link .cl-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+  .contact-link .cl-name {
+    font-size: 13px; font-weight: 500; color: var(--text);
+  }
+  .contact-link .cl-handle {
+    font-family: var(--mono); font-size: 11px; color: var(--text3);
+  }
+  .contact-link .cl-arrow {
+    color: var(--text3); font-size: 16px;
+    transition: color 0.2s;
+  }
+  .contact-link:hover .cl-arrow { color: var(--accent2); }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.04em;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 2px; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1.2rem; }
+    .container { padding: 0 1.2rem; }
+    section { padding: 5rem 0 4rem; }
+    #hero { padding-top: 7rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">akbar.dev</span>
+  <ul class="nav-links">
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Available for work</div>
+    <h1 class="hero-name">Bahodirov<br><span>Akbar</span></h1>
+    <p class="hero-title">Full-Stack Developer &nbsp;·&nbsp; Middle<span class="cursor"></span></p>
+    <p class="hero-desc">
+      I build web apps, backend systems, and Telegram bots that actually work.
+      Python &amp; JavaScript on both ends — clean code, real products.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#projects" class="btn-ghost">See my work</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STACK -->
+<section id="stack">
+  <div class="container">
+    <p class="section-label">Tech stack</p>
+    <h2 class="section-title">What I work with</h2>
+    <div class="stack-grid">
+      <div class="stack-item"><div class="name">Python</div><div class="role">backend / bots</div></div>
+      <div class="stack-item"><div class="name">TypeScript</div><div class="role">fullstack</div></div>
+      <div class="stack-item"><div class="name">JavaScript</div><div class="role">frontend / node</div></div>
+      <div class="stack-item"><div class="name">React</div><div class="role">frontend</div></div>
+      <div class="stack-item"><div class="name">Node.js</div><div class="role">backend / api</div></div>
+      <div class="stack-item"><div class="name">aiogram</div><div class="role">telegram bots</div></div>
+      <div class="stack-item"><div class="name">PostgreSQL</div><div class="role">database</div></div>
+      <div class="stack-item"><div class="name">Redis</div><div class="role">cache / queue</div></div>
+      <div class="stack-item"><div class="name">Docker</div><div class="role">devops</div></div>
+      <div class="stack-item"><div class="name">REST API</div><div class="role">integration</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Projects</p>
+    <h2 class="section-title">Things I've built</h2>
+
+    <!-- Main live project -->
+    <div class="project-card active-project">
+      <div class="project-top">
+        <div>
+          <div class="project-name">Telegram Bot</div>
+        </div>
+        <span class="badge-live">Live</span>
+      </div>
+      <p class="project-desc">
+        A fully functional Telegram bot — my main active project.
+        Handles real users, real data, and real load. Built with Python and aiogram,
+        backed by a PostgreSQL database. Deployed and running in production.
+      </p>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">aiogram</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <!-- Future projects -->
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <div class="project-name">Next project</div>
+        </div>
+        <span class="badge-wip">In progress</span>
+      </div>
+      <p class="project-desc">
+        Something new is being built. Details coming soon.
+      </p>
+      <div class="tag-list">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-top">
+        <div>
+          <div class="project-name">Another project</div>
+        </div>
+        <span class="badge-wip">In progress</span>
+      </div>
+      <p class="project-desc">
+        Currently in development. Stay tuned.
+      </p>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">PostgreSQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About me</p>
+    <h2 class="section-title">A bit about Akbar</h2>
+    <p style="color: var(--text2); margin-bottom: 2rem; font-size: 15px; line-height: 1.8; max-width: 560px;">
+      Full-stack developer at the middle level. I'm comfortable on both the frontend and backend —
+      React and Node.js on one side, Python and bots on the other.
+      I'm currently looking for new opportunities where I can build real things with good people.
+    </p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="label">Level</div>
+        <div class="value">Middle Developer</div>
+      </div>
+      <div class="about-card">
+        <div class="label">Focus</div>
+        <div class="value">Full-Stack &amp; Bots</div>
+      </div>
+      <div class="about-card">
+        <div class="label">Location</div>
+        <div class="value">Uzbekistan</div>
+      </div>
+      <div class="about-card">
+        <div class="label">Status</div>
+        <div class="value" style="color: var(--green);">Open to work ✦</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's talk</h2>
+    <div class="contact-links">
+      <a href="https://t.me/infortx" class="contact-link">
+        <div class="cl-left">
+          <div class="cl-icon">✈</div>
+          <div>
+            <div class="cl-name">Telegram</div>
+            <div class="cl-handle">@infortx</div>
+          </div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="mailto:bahodirovakbar572@gmail.com" class="contact-link">
+        <div class="cl-left">
+          <div class="cl-icon">✉</div>
+          <div>
+            <div class="cl-name">Email</div>
+            <div class="cl-handle">bahodirovakbar572@gmail.com</div>
+          </div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://github.com/bahodirovakbar572-alt" class="contact-link">
+        <div class="cl-left">
+          <div class="cl-icon">⌥</div>
+          <div>
+            <div class="cl-name">GitHub</div>
+            <div class="cl-handle">github.com/bahodirovakbar572-alt</div>
+          </div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/akbar-bahodirov-54047a406/" class="contact-link">
+        <div class="cl-left">
+          <div class="cl-icon">in</div>
+          <div>
+            <div class="cl-name">LinkedIn</div>
+            <div class="cl-handle">linkedin.com/in/akbar-bahodirov</div>
+          </div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  built by bahodirov akbar &nbsp;·&nbsp; 2025
+</footer>
+
+</body>
+</html>
